@@ -65,6 +65,8 @@ public class ChatClientActivity extends Activity implements OnClickListener {
 
 	private EditText messageText;
 
+	private Button btnSend;
+
 	/*
 	 * Called when the activity is first created.
 	 */
@@ -82,7 +84,12 @@ public class ChatClientActivity extends Activity implements OnClickListener {
 		StrictMode.setThreadPolicy(policy);
 
 		// TODO initialize the UI.
+		messageText = findViewById(R.id.message_text);
+		chatName = findViewById(R.id.chat_name);
+		destinationHost = findViewById(R.id.destination_host);
+		btnSend= findViewById(R.id.send_button);
 
+		btnSend.setOnClickListener(this);
 		
 		// End todo
 
@@ -126,9 +133,9 @@ public class ChatClientActivity extends Activity implements OnClickListener {
 			CurrentLocation location = CurrentLocation.getLocation(this);
 
 			// TODO get data from UI (no-op if chat name is blank)
-
-
-
+			destAddrString = destinationHost.getText().toString();
+			clientName = chatName.getText().toString();
+			text = messageText.getText().toString();
 			// End todo
 
 			if (destAddrString.isEmpty()) {

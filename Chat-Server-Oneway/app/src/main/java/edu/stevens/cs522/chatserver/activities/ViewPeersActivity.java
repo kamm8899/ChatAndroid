@@ -19,19 +19,24 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
     public static final String PEERS_KEY = "peers";
 
     ArrayAdapter<Peer> peersAdapter;
+    ListView lstPeers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_peers);
 
+        //get the list of peers from the intent
         ArrayList<Peer> peers = getIntent().getParcelableArrayListExtra(PEERS_KEY);
         if (peers == null) {
             throw new IllegalArgumentException("Missing list of peers!");
         }
 
         // TODO display the list of peers, set this activity as onClick listener
-
+        lstPeers = findViewById(R.id.peer_list);
+        peersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,peers);
+        lstPeers.setOnItemClickListener(this);
+        lstPeers.setAdapter(peersAdapter);
     }
 
     @Override

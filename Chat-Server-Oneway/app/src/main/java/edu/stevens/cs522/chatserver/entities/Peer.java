@@ -31,7 +31,7 @@ public class Peer implements Parcelable {
 
     @Override
     public String toString() {
-        // TODO
+
         return name;
     }
 
@@ -42,12 +42,22 @@ public class Peer implements Parcelable {
 
     public Peer(Parcel in) {
         // TODO
+        id = in.readLong();
+        name = in.readString();
+        timestamp = DateUtils.readDate(in);
+        latitude = in.readDouble();
+        longitude = in.readDouble();
 
     }
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
         // TODO
+        out.writeLong(id);
+        out.writeString(name);
+        DateUtils.writeDate(out, timestamp);
+        out.writeDouble(latitude);
+        out.writeDouble(longitude);
 
     }
 
@@ -56,13 +66,15 @@ public class Peer implements Parcelable {
         @Override
         public Peer createFromParcel(Parcel source) {
             // TODO
-            return null;
+            return new Peer(source);
+            //return null;
         }
 
         @Override
         public Peer[] newArray(int size) {
             // TODO
-            return null;
+            return new Peer[size];
+            //return null;
         }
 
     };
